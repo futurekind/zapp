@@ -1,22 +1,23 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
-import { GraphQLServer } from 'graphql-yoga';
+import 'reflect-metadata';
+import { PrismaClient } from '@prisma/client';
+import { resolvers } from './prisma/generated/type-graphql';
+import { buildSchema } from 'type-graphql';
+import { ApolloServer } from 'apollo-server';
 
-const typeDefs = `
-  type Query {
-    hello(name: String): String!
-  }
-`;
+const main = async () => {
+    const prisma = new PrismaClient();
 
-const resolvers = {
-    Query: {
-        hello: (_: any, { name }: any) => `Hello ${name || 'World'}`,
-    },
+    const schema = await buildSchema({ resolvers, validate: false });
+
+    const server = new ApolloServer({
+        schema,
+        context: () => ({ prisma }),
+    });
+
+    const { url } = await server.listen(process.env.GRAPHQL_SERVER_PORT);
+    console.log(`Server is running, GraphQL Playground available at ${url}`);
 };
 
-const server = new GraphQLServer({ typeDefs, resolvers });
-server.start({ port: process.env.GRAPHQL_SERVER_PORT }, () =>
-    console.log(
-        `Server is running on localhost:${process.env.GRAPHQL_SERVER_PORT}`
-    )
-);
+main();
