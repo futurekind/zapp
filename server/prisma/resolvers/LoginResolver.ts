@@ -21,7 +21,7 @@ class LoginResolver {
 
         if (!passwordsMatch) throw new Error('Wrong login credentials');
 
-        prisma.user.update({
+        await prisma.user.update({
             where: { id: user.id },
             data: { lastLoginAt: new Date() },
         });
