@@ -2,14 +2,18 @@
 require('dotenv').config();
 import 'reflect-metadata';
 import { PrismaClient } from '@prisma/client';
-import { resolvers } from './prisma/generated/type-graphql';
 import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server';
+import LoginResolver from './prisma/resolvers/LoginResolver';
+import { resolvers } from './prisma/generated/type-graphql';
 
 const main = async () => {
     const prisma = new PrismaClient();
 
-    const schema = await buildSchema({ resolvers, validate: false });
+    const schema = await buildSchema({
+        resolvers: [...resolvers, LoginResolver],
+        validate: false,
+    });
 
     const server = new ApolloServer({
         schema,
