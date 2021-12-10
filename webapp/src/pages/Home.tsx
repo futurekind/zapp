@@ -1,10 +1,9 @@
 import { FC } from 'react';
-import { useMeQuery } from 'generated/graphql';
+import { useAuthorization } from 'hooks/useAuthorization';
 
 const Home: FC = () => {
-    const [{ data: meData, error }] = useMeQuery();
-
-    console.log(meData, error);
+    const me = useAuthorization();
+    if (!me) return null;
 
     return <span>Home</span>;
 };
