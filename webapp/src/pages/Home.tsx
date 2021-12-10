@@ -5,7 +5,7 @@ const Home: FC = () => {
     const me = useAuthorization();
     if (!me) return null;
 
-    return <span>Home</span>;
+    return <span>Hey {me.firstname}</span>;
 };
 
 export default Home;
