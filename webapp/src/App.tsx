@@ -1,3 +1,4 @@
+import Home from 'pages/Home';
 import { FC } from 'react';
 import { createClient, Provider } from 'urql';
 
@@ -8,7 +9,7 @@ const client = createClient({
 const App: FC = () => {
     return (
         <Provider value={client}>
-            <h1>App</h1>
+            <Home />
         </Provider>
     );
 };
