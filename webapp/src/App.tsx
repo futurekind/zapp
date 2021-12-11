@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { createClient, Provider } from 'urql';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCookie } from 'utils/cookie';
+import Login from 'pages/Login';
 
 const client = createClient({
     url: process.env.REACT_APP_GRAPHQL_ENDPOINT as string,
@@ -22,6 +23,7 @@ const App: FC = () => {
             <Router>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
             </Router>
         </Provider>
