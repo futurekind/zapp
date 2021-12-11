@@ -1,11 +1,8 @@
 import { FC } from 'react';
-import { useAuthorization } from 'hooks/useAuthorization';
+import { ProtectedPage, withProtection } from 'utils/withProtection';
 
-const Home: FC = () => {
-    const me = useAuthorization();
-    if (!me) return null;
-
+const Home: FC<ProtectedPage> = ({ me }) => {
     return <span>Hey {me.firstname}</span>;
 };
 
-export default Home;
+export default withProtection(Home);
