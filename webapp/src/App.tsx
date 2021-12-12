@@ -4,6 +4,9 @@ import { createClient, Provider } from 'urql';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getCookie } from 'utils/cookie';
 import Login from 'pages/Login';
+import { EuiProvider } from '@elastic/eui';
+
+import '@elastic/eui/dist/eui_theme_dark.css';
 
 const client = createClient({
     url: process.env.REACT_APP_GRAPHQL_ENDPOINT as string,
@@ -20,12 +23,14 @@ const client = createClient({
 const App: FC = () => {
     return (
         <Provider value={client}>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                </Routes>
-            </Router>
+            <EuiProvider colorMode="dark">
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/login" element={<Login />} />
+                    </Routes>
+                </Router>
+            </EuiProvider>
         </Provider>
     );
 };
