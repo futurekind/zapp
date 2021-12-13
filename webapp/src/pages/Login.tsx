@@ -6,6 +6,12 @@ import { setCookie } from 'utils/cookie';
 import { useNavigate } from 'react-router-dom';
 import { useAuthorization } from 'hooks/useAuthorization';
 import { useEffect } from 'react';
+import {
+    EuiPageTemplate,
+    EuiFieldText,
+    EuiFormRow,
+    EuiForm,
+} from '@elastic/eui';
 
 const validationSchema = yup.object({
     email: yup
@@ -52,38 +58,36 @@ const Login: FC = () => {
         });
 
     return (
-        <form onSubmit={handleSubmit}>
-            {hasError && <p style={{ color: 'red' }}>Falsche Daten</p>}
-            <label>
-                E-Mail{' '}
-                <input
-                    type="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    name="email"
-                />
-                {errors.email && touched.email && (
-                    <span style={{ color: 'red' }}>{errors.email}</span>
-                )}
-            </label>
-            <br />
-            <label>
-                Passwort{' '}
-                <input
-                    type="password"
-                    value={values.password}
-                    onChange={handleChange}
-                    name="password"
-                />
-                {errors.password && touched.password && (
-                    <span style={{ color: 'red' }}>{errors.password}</span>
-                )}
-            </label>
-            <br />
-            <button disabled={fetching} type="submit">
-                Login
-            </button>
-        </form>
+        <EuiPageTemplate
+            template="centeredBody"
+            pageContentProps={{ paddingSize: 'm' }}
+        >
+            <EuiForm onSubmit={handleSubmit} component="form">
+                {hasError && <p style={{ color: 'red' }}>Falsche Daten</p>}
+
+                <EuiFormRow label="E-Mail Adresse">
+                    <EuiFieldText
+                        value={values.email}
+                        onChange={handleChange}
+                        name="email"
+                        size={100}
+                    />
+                </EuiFormRow>
+
+                <EuiFormRow label="Passwort">
+                    <EuiFieldText
+                        value={values.password}
+                        onChange={handleChange}
+                        name="password"
+                        type="password"
+                    />
+                </EuiFormRow>
+
+                <button disabled={fetching} type="submit">
+                    Login
+                </button>
+            </EuiForm>
+        </EuiPageTemplate>
     );
 };
 
