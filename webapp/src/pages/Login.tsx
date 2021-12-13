@@ -11,6 +11,11 @@ import {
     EuiFieldText,
     EuiFormRow,
     EuiForm,
+    EuiCallOut,
+    EuiSpacer,
+    EuiTitle,
+    EuiButton,
+    EuiFlexGroup,
 } from '@elastic/eui';
 
 const validationSchema = yup.object({
@@ -63,9 +68,29 @@ const Login: FC = () => {
             pageContentProps={{ paddingSize: 'm' }}
         >
             <EuiForm onSubmit={handleSubmit} component="form">
-                {hasError && <p style={{ color: 'red' }}>Falsche Daten</p>}
+                <EuiTitle>
+                    <h1>Login</h1>
+                </EuiTitle>
+                <EuiSpacer size="xxl" />
+                {hasError && (
+                    <>
+                        <EuiCallOut
+                            title="Probleme beim Einloggen"
+                            color="danger"
+                            iconType="alert"
+                        >
+                            Die angegebenen Zugangsdaten scheinen nicht zu
+                            stimmen.
+                        </EuiCallOut>
+                        <EuiSpacer size="l" />
+                    </>
+                )}
 
-                <EuiFormRow label="E-Mail Adresse">
+                <EuiFormRow
+                    label="E-Mail Adresse"
+                    error={errors.email}
+                    isInvalid={touched.email && errors.email !== undefined}
+                >
                     <EuiFieldText
                         value={values.email}
                         onChange={handleChange}
@@ -74,7 +99,13 @@ const Login: FC = () => {
                     />
                 </EuiFormRow>
 
-                <EuiFormRow label="Passwort">
+                <EuiFormRow
+                    label="Passwort"
+                    error={errors.password}
+                    isInvalid={
+                        touched.password && errors.password !== undefined
+                    }
+                >
                     <EuiFieldText
                         value={values.password}
                         onChange={handleChange}
@@ -83,9 +114,17 @@ const Login: FC = () => {
                     />
                 </EuiFormRow>
 
-                <button disabled={fetching} type="submit">
-                    Login
-                </button>
+                <EuiSpacer size="l" />
+
+                <EuiFlexGroup alignItems="flexEnd" gutterSize="none">
+                    <EuiButton
+                        isLoading={fetching}
+                        type="submit"
+                        color="accent"
+                    >
+                        Login
+                    </EuiButton>
+                </EuiFlexGroup>
             </EuiForm>
         </EuiPageTemplate>
     );
