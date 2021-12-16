@@ -30,6 +30,8 @@ model Feed {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime? @default(now())
   url        String
+  name       String
+  iconUrl    String?
   orderIndex Float
   userId     String
   user       User      @relation(fields: [userId], references: [id])
