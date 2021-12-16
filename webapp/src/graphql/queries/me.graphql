@@ -5,5 +5,11 @@ query Me {
         firstname
         lastname
         lastLoginAt
+        feed(orderBy: { orderIndex: asc }) {
+            id
+            orderIndex
+            createdAt
+            url
+        }
     }
 }
