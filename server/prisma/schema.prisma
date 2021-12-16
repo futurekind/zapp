@@ -22,4 +22,15 @@ model User {
   lastname    String
   updatedAt   DateTime? @default(now())
   lastLoginAt DateTime?
+  feed        Feed[]
+}
+
+model Feed {
+  id         String    @id @default(uuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime? @default(now())
+  url        String
+  orderIndex Float
+  userId     String
+  user       User      @relation(fields: [userId], references: [id])
 }

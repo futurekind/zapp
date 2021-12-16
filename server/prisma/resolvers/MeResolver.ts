@@ -1,12 +1,13 @@
+import { User } from '@prisma/client';
 import { verify } from 'jsonwebtoken';
 import { Ctx, Query, Resolver, UseMiddleware } from 'type-graphql';
 import { AppContext } from '../../utils/types';
-import { User } from '../generated/type-graphql';
+import { User as GQLUser } from '../generated/type-graphql';
 import { isAuthorized } from '../middleware/isAuthorized';
 
 @Resolver()
 class MeResolver {
-    @Query(() => User!)
+    @Query(() => GQLUser!)
     @UseMiddleware(isAuthorized)
     async me(@Ctx() { prisma, headers }: AppContext): Promise<User> {
         const token = headers.authorization?.replace('Bearer ', '');
