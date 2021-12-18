@@ -14,7 +14,9 @@ class MeResolver {
             include: { feed: true },
         });
 
-        return user as User | null;
+        return user
+            ? { ...user, _count: { feed: user?.feed.length || 0 } }
+            : null;
     }
 }
 

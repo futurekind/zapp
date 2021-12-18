@@ -31,7 +31,9 @@ model Feed {
   url        String
   name       String
   iconUrl    String?
-  orderIndex Float
+  orderIndex Float?
+  /// @TypeGraphQL.omit(input: true)
   userId     String
+  /// @TypeGraphQL.omit(input: true)
   user       User      @relation(fields: [userId], references: [id])
 }

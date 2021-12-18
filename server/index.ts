@@ -8,6 +8,7 @@ import LoginResolver from './prisma/resolvers/LoginResolver';
 import RegisterResolver from './prisma/resolvers/RegisterResolver';
 import MeResolver from './prisma/resolvers/MeResolver';
 import { UserRelationsResolver } from '@generated/type-graphql';
+import FeedResolver from './prisma/resolvers/FeedResolver';
 
 const main = async () => {
     const prisma = new PrismaClient();
@@ -18,6 +19,7 @@ const main = async () => {
             LoginResolver,
             RegisterResolver,
             MeResolver,
+            FeedResolver,
         ],
         validate: false,
     });
