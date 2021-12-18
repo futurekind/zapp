@@ -1,11 +1,7 @@
 import { verify } from 'jsonwebtoken';
-import { MiddlewareFn } from 'type-graphql';
 import { AppContext } from '../../utils/types';
 
-export const isAuthorized: MiddlewareFn<AppContext> = async (
-    { context: { prisma, headers } },
-    next
-) => {
+export const isAuthorized = async ({ prisma, headers }: AppContext) => {
     const token = headers.authorization?.replace('Bearer ', '');
 
     if (!token) throw new Error('Not authorized');
@@ -19,9 +15,9 @@ export const isAuthorized: MiddlewareFn<AppContext> = async (
         });
 
         if (!user) throw new Error('Not authorized');
+
+        return user.id;
     } catch (err) {
         throw new Error('Not authorized');
     }
-
-    return next();
 };
