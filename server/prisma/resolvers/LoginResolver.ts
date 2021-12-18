@@ -5,7 +5,7 @@ import { AppContext } from '../../utils/types';
 
 @Resolver()
 class LoginResolver {
-    @Mutation((returns) => String!)
+    @Mutation(() => String!)
     async login(
         @Ctx() { prisma }: AppContext,
         @Arg('email') email: string,

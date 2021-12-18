@@ -2,7 +2,7 @@ import { User } from '@prisma/client';
 import { verify } from 'jsonwebtoken';
 import { Ctx, Query, Resolver, UseMiddleware } from 'type-graphql';
 import { AppContext } from '../../utils/types';
-import { User as GQLUser } from '../generated/type-graphql';
+import { User as GQLUser } from '@generated/type-graphql';
 import { isAuthorized } from '../middleware/isAuthorized';
 
 @Resolver()

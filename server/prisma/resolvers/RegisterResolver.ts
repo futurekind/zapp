@@ -1,6 +1,6 @@
 import { Args, Ctx, Mutation, Resolver } from 'type-graphql';
 import { AppContext } from '../../utils/types';
-import { CreateUserArgs, User as GQLUser } from '../generated/type-graphql';
+import { CreateUserArgs, User as GQLUser } from '@generated/type-graphql';
 import * as bcrypt from 'bcryptjs';
 import { User } from '@prisma/client';
 
