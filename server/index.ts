@@ -7,7 +7,10 @@ import { ApolloServer } from 'apollo-server';
 import LoginResolver from './prisma/resolvers/LoginResolver';
 import RegisterResolver from './prisma/resolvers/RegisterResolver';
 import MeResolver from './prisma/resolvers/MeResolver';
-import { UserRelationsResolver } from '@generated/type-graphql';
+import {
+    UserRelationsResolver,
+    FeedRelationsResolver,
+} from '@generated/type-graphql';
 import FeedResolver from './prisma/resolvers/FeedResolver';
 
 const main = async () => {
@@ -16,6 +19,7 @@ const main = async () => {
     const schema = await buildSchema({
         resolvers: [
             UserRelationsResolver,
+            FeedRelationsResolver,
             LoginResolver,
             RegisterResolver,
             MeResolver,

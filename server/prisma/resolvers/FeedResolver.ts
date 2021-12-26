@@ -17,6 +17,7 @@ class FeedResolver {
                 ...data,
                 orderIndex: 0,
                 user: { connect: { id: userId } },
+                category: data.category,
             },
         });
 

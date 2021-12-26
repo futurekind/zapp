@@ -19,7 +19,7 @@ model User {
   password    String
   firstname   String
   lastname    String
-  updatedAt   DateTime? @default(now())
+  updatedAt   DateTime?
   lastLoginAt DateTime?
   feed        Feed[]
 }
@@ -27,7 +27,7 @@ model User {
 model Feed {
   id         String    @id @default(uuid())
   createdAt  DateTime  @default(now())
-  updatedAt  DateTime? @default(now())
+  updatedAt  DateTime?
   url        String
   name       String
   iconUrl    String?
@@ -36,4 +36,15 @@ model Feed {
   userId     String
   /// @TypeGraphQL.omit(input: true)
   user       User      @relation(fields: [userId], references: [id])
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?   @unique
+}
+
+model Category {
+  id         String    @id @default(uuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime?
+  name       String
+  orderIndex Float?
+  feed       Feed?
 }
