@@ -7,26 +7,9 @@ import {
     EuiAvatar,
     EuiPageTemplate,
     EuiHeaderLogo,
-    EuiText,
-    EuiButton,
-    EuiSpacer,
 } from '@elastic/eui';
 import { MeQuery } from 'generated/graphql';
-
-const Feeds: FC<{ feeds: MeQuery['me']['feed'] }> = ({ feeds }) => {
-    if (feeds.length === 0)
-        return (
-            <>
-                <EuiText size="s">Noch keine Feeds vorhanden</EuiText>
-                <EuiSpacer />
-                <EuiButton size="s" color="accent">
-                    Feed hinzufügen
-                </EuiButton>
-            </>
-        );
-
-    return null;
-};
+import Feeds from './Feeds';
 
 const Page: FC<{ me: MeQuery['me']; pageTitle?: string }> = ({
     me,

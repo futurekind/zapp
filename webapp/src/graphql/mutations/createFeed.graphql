@@ -1,0 +1,14 @@
+mutation CreateFeed($data: FeedCreateInput!) {
+    createFeed(data: $data) {
+        id
+        name
+        userId
+        orderIndex
+        createdAt
+        category {
+            id
+            name
+            orderIndex
+        }
+    }
+}
