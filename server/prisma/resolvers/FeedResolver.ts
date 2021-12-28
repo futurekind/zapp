@@ -14,6 +14,33 @@ import { isAuthorized } from '../middleware/isAuthorized';
 import Parser from 'rss-parser';
 
 @ObjectType()
+class ParserItem {
+    @Field({ nullable: true })
+    link?: string;
+
+    @Field({ nullable: true })
+    guid?: string;
+
+    @Field({ nullable: true })
+    title?: string;
+
+    @Field({ nullable: true })
+    pubDate?: string;
+
+    @Field({ nullable: true })
+    creator?: string;
+
+    @Field({ nullable: true })
+    summary?: string;
+
+    @Field({ nullable: true })
+    content?: string;
+
+    @Field({ nullable: true })
+    isoDate?: string;
+}
+
+@ObjectType()
 class ParserOutput {
     @Field({ nullable: true })
     title?: string;
@@ -22,7 +49,13 @@ class ParserOutput {
     feedUrl?: string;
 
     @Field({ nullable: true })
+    link?: string;
+
+    @Field({ nullable: true })
     iconUrl?: string;
+
+    @Field(() => [ParserItem])
+    items: ParserItem[];
 }
 
 @Resolver()
@@ -51,10 +84,24 @@ class FeedResolver {
         @Ctx() ctx: AppContext,
         @Arg('url') url: string
     ): Promise<ParserOutput | null> {
+        await isAuthorized(ctx);
+
         const parser = new Parser();
         const result = await parser.parseURL(url);
+        const items = result.items.slice();
 
-        return result;
+        return {
+            ...result,
+            items: items.sort((a, b) => {
+                if (a.pubDate && b.pubDate) {
+                    if (a.pubDate > b.pubDate) return -1;
+                } else {
+                    return -1;
+                }
+
+                return 0;
+            }),
+        };
     }
 }
 
