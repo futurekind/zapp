@@ -25,19 +25,20 @@ model User {
 }
 
 model Feed {
-  id         String    @id @default(uuid())
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime?
-  url        String
-  name       String
-  iconUrl    String?
-  orderIndex Float?
+  id           String    @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime?
+  lastSyncedAt DateTime?
+  url          String
+  name         String
+  iconUrl      String?
+  orderIndex   Float?
   /// @TypeGraphQL.omit(input: true)
-  userId     String
+  userId       String
   /// @TypeGraphQL.omit(input: true)
-  user       User      @relation(fields: [userId], references: [id])
-  category   Category? @relation(fields: [categoryId], references: [id])
-  categoryId String?   @unique
+  user         User      @relation(fields: [userId], references: [id])
+  category     Category? @relation(fields: [categoryId], references: [id])
+  categoryId   String?   @unique
 }
 
 model Category {

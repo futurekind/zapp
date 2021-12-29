@@ -37,6 +37,9 @@ class ParserItem {
     content?: string;
 
     @Field({ nullable: true })
+    contentSnippet?: string;
+
+    @Field({ nullable: true })
     isoDate?: string;
 }
 
@@ -93,8 +96,8 @@ class FeedResolver {
         return {
             ...result,
             items: items.sort((a, b) => {
-                if (a.pubDate && b.pubDate) {
-                    if (a.pubDate > b.pubDate) return -1;
+                if (a.isoDate && b.isoDate) {
+                    if (a.isoDate > b.isoDate) return -1;
                 } else {
                     return -1;
                 }
