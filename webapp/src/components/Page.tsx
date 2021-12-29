@@ -10,7 +10,11 @@ const Page: FC<{ me: MeQuery['me']; pageTitle?: string }> = ({
 }) => {
     return (
         <>
-            <PageHeader />
+            <PageHeader
+                avatarInitials={`${me.firstname.charAt(0)}${me.lastname.charAt(
+                    0
+                )}`}
+            />
         </>
     );
 };
