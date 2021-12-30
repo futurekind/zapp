@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Menu } from 'heroicons-react';
+import { LightningBolt, Menu } from 'heroicons-react';
 
 const getBgColor = (str: string) => {
     const colors = [
@@ -12,21 +12,21 @@ const getBgColor = (str: string) => {
     ];
     const index =
         (str.charCodeAt(0) + (str.charCodeAt(1) || 0)) % colors.length;
-    console.log(str.charCodeAt(0));
-    console.log(str.charCodeAt(1) || 0);
 
     return colors[index];
 };
 
 const PageHeader: FC<{ avatarInitials?: string }> = ({ avatarInitials }) => {
     return (
-        <header className="flex p-4 bg-slate-800 shadow-md fixed w-screen top-0 left-0 items-center justify-between">
-            <div>
+        <header className="flex p-4 bg-slate-900 shadow-md fixed w-screen top-0 left-0 items-center justify-between">
+            <div className="flex items-center gap-x-2">
                 <Menu className="cursor-pointer hover:text-slate-200 lg:hidden" />
+                <LightningBolt className="text-purple-700" />
+                <div className="text-center text-xl uppercase shadow-sm">
+                    Zappscription
+                </div>
             </div>
-            <div className="text-center text-xl uppercase shadow-sm">
-                Zappscription
-            </div>
+
             <div>
                 {avatarInitials && (
                     <span

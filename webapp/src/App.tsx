@@ -20,10 +20,10 @@ const client = createClient({
 const App: FC = () => {
     return (
         <Provider value={client}>
-            <main className="bg-slate-900 h-screen overflow-hidden text-white">
+            <main className="bg-slate-800 h-screen overflow-hidden text-white">
                 <Router>
                     <Routes>
-                        <Route path="/" element={<Home />} />
+                        <Route path="/:page" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                     </Routes>
                 </Router>
