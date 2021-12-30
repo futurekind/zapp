@@ -11,13 +11,7 @@ const Page: FC<{ me: MeQuery['me']; pageTitle?: string }> = ({
 }) => {
     return (
         <div>
-            <PageHeader
-                avatarInitials={`${me.firstname.charAt(0)}${me.lastname.charAt(
-                    0
-                )}`}
-            />
-
-            <Sidebar />
+            <Sidebar me={me} />
         </div>
     );
 };

@@ -5,11 +5,18 @@ query Me {
         firstname
         lastname
         lastLoginAt
+        _count {
+            feed
+        }
         feed(orderBy: { orderIndex: asc }) {
             id
             orderIndex
             createdAt
             url
+            category {
+                id
+                name
+            }
         }
     }
 }
