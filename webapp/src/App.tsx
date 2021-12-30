@@ -1,7 +1,12 @@
 import Home from 'pages/Home';
 import { FC } from 'react';
 import { createClient, Provider } from 'urql';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    Navigate,
+} from 'react-router-dom';
 import { getCookie } from 'utils/cookie';
 import Login from 'pages/Login';
 
@@ -23,6 +28,10 @@ const App: FC = () => {
             <main className="bg-slate-700 h-screen overflow-hidden text-white">
                 <Router>
                     <Routes>
+                        <Route
+                            path="/"
+                            element={<Navigate replace to="/all" />}
+                        />
                         <Route path="/:page" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                     </Routes>

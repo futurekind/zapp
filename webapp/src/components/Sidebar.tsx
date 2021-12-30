@@ -69,7 +69,7 @@ const Sidebar: FC<{ me: MeQuery['me'] }> = ({ me }) => {
                         icon={<StarOutline className="w-4" />}
                         isActive={page === 'starred'}
                         onClick={() => navigate('/starred')}
-                        aside={<Chip>167</Chip>}
+                        aside={<Chip>0</Chip>}
                     >
                         Starred Articles
                     </Item>
