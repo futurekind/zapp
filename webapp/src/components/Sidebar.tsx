@@ -4,10 +4,12 @@ import {
     LightningBolt,
     Menu,
     Plus,
+    Refresh,
     Search,
     StarOutline,
+    X,
 } from 'heroicons-react';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const Item: FC<{
@@ -36,11 +38,17 @@ const Chip: FC = ({ children }) => (
 const Sidebar: FC<{ me: MeQuery['me'] }> = ({ me }) => {
     const { page } = useParams();
     const navigate = useNavigate();
+    const [menuOpen, setMenuOpen] = useState(false);
 
     return (
         <aside className="h-screen w-80 flex fixed left-0 top-0">
             <div className="w-14 bg-slate-900 flex flex-col items-center py-4 gap-y-4">
-                <LightningBolt className="text-purple-700 w-12 h-12" />
+                <LightningBolt className="text-purple-700 w-12 h-12 hidden lg:inline-block" />
+
+                <button className="hover:text-slate-300 mt-3 lg:hidden">
+                    {!menuOpen && <Menu onClick={() => setMenuOpen(true)} />}
+                    {menuOpen && <X onClick={() => setMenuOpen(false)} />}
+                </button>
                 <div className="grow" />
 
                 <button className="hover:text-slate-300">
@@ -48,11 +56,19 @@ const Sidebar: FC<{ me: MeQuery['me'] }> = ({ me }) => {
                 </button>
 
                 <button className="hover:text-slate-300">
+                    <Refresh className="w-6 h-6" />
+                </button>
+
+                <button className="hover:text-slate-300">
                     <Search className="w-6 h-6" />
                 </button>
             </div>
 
-            <div className="grow py-4 bg-slate-800 h-full overflow-scroll">
+            <div
+                className={`grow py-4 bg-slate-800 h-full overflow-scroll transition-transform translate-x-[${
+                    menuOpen ? '0' : '-125%'
+                }] lg:translate-x-0`}
+            >
                 <div className="text-xl uppercase shadow-sm mb-12 mt-3 px-4">
                     Zappscription
                 </div>
