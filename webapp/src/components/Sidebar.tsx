@@ -10,7 +10,7 @@ import {
     X,
 } from 'heroicons-react';
 import React, { FC, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Item: FC<{
     onClick?: React.MouseEventHandler<HTMLLIElement>;
@@ -36,9 +36,11 @@ const Chip: FC = ({ children }) => (
 );
 
 const Sidebar: FC<{ me: MeQuery['me'] }> = ({ me }) => {
-    const { page } = useParams();
+    const { pathname } = useLocation();
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
+
+    console.log(menuOpen);
 
     return (
         <aside className="h-screen w-80 flex fixed left-0 top-0">
@@ -65,9 +67,9 @@ const Sidebar: FC<{ me: MeQuery['me'] }> = ({ me }) => {
             </div>
 
             <div
-                className={`grow py-4 bg-slate-800 h-full overflow-scroll transition-transform translate-x-[${
-                    menuOpen ? '0' : '-125%'
-                }] lg:translate-x-0`}
+                className={`grow py-4 bg-slate-800 h-full overflow-scroll transition-transform ${
+                    menuOpen ? 'translate-x-0' : '-translate-x-80'
+                } lg:translate-x-0`}
             >
                 <div className="text-xl uppercase shadow-sm mb-12 mt-3 px-4">
                     Zappscription
@@ -75,7 +77,7 @@ const Sidebar: FC<{ me: MeQuery['me'] }> = ({ me }) => {
                 <ul>
                     <Item
                         icon={<CollectionOutline className="w-4" />}
-                        isActive={page === 'all'}
+                        isActive={pathname === '/all'}
                         onClick={() => navigate('/all')}
                         aside={<Chip>{me._count.feed}</Chip>}
                     >
@@ -83,7 +85,7 @@ const Sidebar: FC<{ me: MeQuery['me'] }> = ({ me }) => {
                     </Item>
                     <Item
                         icon={<StarOutline className="w-4" />}
-                        isActive={page === 'starred'}
+                        isActive={pathname === '/starred'}
                         onClick={() => navigate('/starred')}
                         aside={<Chip>0</Chip>}
                     >

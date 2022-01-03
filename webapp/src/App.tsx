@@ -32,7 +32,7 @@ const App: FC = () => {
                             path="/"
                             element={<Navigate replace to="/all" />}
                         />
-                        <Route path="/:page" element={<Home />} />
+                        <Route path="/all" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                     </Routes>
                 </Router>
