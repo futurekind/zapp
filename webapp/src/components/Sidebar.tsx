@@ -40,8 +40,6 @@ const Sidebar: FC<{ me: MeQuery['me'] }> = ({ me }) => {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
 
-    console.log(menuOpen);
-
     return (
         <aside className="h-screen w-80 flex fixed left-0 top-0">
             <div className="w-14 bg-slate-900 flex flex-col items-center py-4 gap-y-4">
@@ -53,7 +51,10 @@ const Sidebar: FC<{ me: MeQuery['me'] }> = ({ me }) => {
                 </button>
                 <div className="grow" />
 
-                <button className="hover:text-slate-300">
+                <button
+                    className="hover:text-slate-300"
+                    onClick={() => navigate('/add')}
+                >
                     <Plus className="w-12 h-12" />
                 </button>
 
