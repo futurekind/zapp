@@ -1,7 +1,7 @@
 // import { Feed, User } from '@prisma/client';
 import { Ctx, Query, Resolver } from 'type-graphql';
 import { AppContext } from '../../utils/types';
-import { User } from '@generated/type-graphql';
+import { User } from '../generated/type-graphql';
 import { isAuthorized } from '../middleware/isAuthorized';
 
 @Resolver()

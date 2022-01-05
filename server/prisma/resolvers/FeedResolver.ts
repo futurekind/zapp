@@ -9,7 +9,7 @@ import {
     Resolver,
 } from 'type-graphql';
 import { AppContext } from '../../utils/types';
-import { CreateFeedArgs, Feed } from '@generated/type-graphql';
+import { CreateFeedArgs, Feed } from '../generated/type-graphql';
 import { isAuthorized } from '../middleware/isAuthorized';
 import Parser from 'rss-parser';
 

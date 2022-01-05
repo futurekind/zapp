@@ -10,7 +10,7 @@ import MeResolver from './prisma/resolvers/MeResolver';
 import {
     UserRelationsResolver,
     FeedRelationsResolver,
-} from '@generated/type-graphql';
+} from './prisma/generated/type-graphql';
 import FeedResolver from './prisma/resolvers/FeedResolver';
 
 const main = async () => {
