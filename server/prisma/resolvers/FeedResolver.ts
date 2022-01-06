@@ -12,6 +12,8 @@ import { AppContext } from '../../utils/types';
 import { CreateFeedArgs, Feed } from '../generated/type-graphql';
 import { isAuthorized } from '../middleware/isAuthorized';
 import Parser from 'rss-parser';
+import { parseFavicon } from 'parse-favicon';
+import axios from 'axios';
 
 @ObjectType()
 class ParserItem {
@@ -93,8 +95,15 @@ class FeedResolver {
         const result = await parser.parseURL(url);
         const items = result.items.slice();
 
+        const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+        const favicon = await parseFavicon(
+            result.link || '',
+            fetcher
+        ).toPromise();
+
         return {
             ...result,
+            iconUrl: favicon?.url,
             items: items.sort((a, b) => {
                 if (a.isoDate && b.isoDate) {
                     if (a.isoDate > b.isoDate) return -1;
