@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import { getCookie } from 'utils/cookie';
 import Login from 'pages/Login';
-import Add from 'components/Add';
+import Add from 'pages/Add';
 
 const client = createClient({
     url: process.env.REACT_APP_GRAPHQL_ENDPOINT as string,
